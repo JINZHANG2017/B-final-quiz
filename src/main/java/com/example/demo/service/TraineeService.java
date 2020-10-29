@@ -2,12 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.dto.Trainee;
 import com.example.demo.entity.TraineeEntity;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.TraineeRepository;
 import com.example.demo.repository.TrainerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +41,11 @@ public class TraineeService {
     }
 
     public void delete(Integer id) {
-        traineeRepository.deleteById(id);
+        Optional<TraineeEntity> traineeEntity = traineeRepository.findById(id);
+        if(traineeEntity.isPresent()){
+            traineeRepository.deleteById(id);
+        }else{
+            throw new ResourceNotFoundException("未找到学员！");
+        }
     }
 }

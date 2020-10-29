@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 
+import com.example.demo.dto.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +30,10 @@ public class TrainerEntity {
     private Integer id;
     private String name;
     @ManyToOne
-    @JoinColumn(name = "group_id",foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private GroupEntity group;
+
+    public Trainer toDto() {
+        return new Trainer(id, name);
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,13 +37,13 @@ public class TraineeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Trainee addTrainee(@RequestBody Trainee trainee){
+    public Trainee addTrainee(@RequestBody @Valid Trainee trainee){
         return traineeService.add(trainee);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{trainee_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTrainee(@PathVariable(value = "id") Integer id){
+    public void deleteTrainee(@PathVariable(value = "trainee_id") Integer id){
         traineeService.delete(id);
     }
 }
