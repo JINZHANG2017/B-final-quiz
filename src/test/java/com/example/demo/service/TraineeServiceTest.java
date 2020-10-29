@@ -33,22 +33,22 @@ class TraineeServiceTest {
 
     @BeforeEach
     void setUp() {
-        traineeService=new TraineeService(traineeRepository);
-        GroupEntity groupEntity=new GroupEntity(1,"group1");
-        TraineeEntity groupedTrainee1=new TraineeEntity(1,"name1",groupEntity);
-        TraineeEntity groupedTrainee2=new TraineeEntity(2,"name2",groupEntity);
-        groupedTraineeList=new ArrayList<>();
+        traineeService = new TraineeService(traineeRepository);
+        GroupEntity groupEntity = new GroupEntity(1, "group1",null,null);
+        TraineeEntity groupedTrainee1 = new TraineeEntity(1, "name1", groupEntity);
+        TraineeEntity groupedTrainee2 = new TraineeEntity(2, "name2", groupEntity);
+        groupedTraineeList = new ArrayList<>();
         groupedTraineeList.add(groupedTrainee1);
         groupedTraineeList.add(groupedTrainee2);
-        TraineeEntity ungroupedTrainee1=new TraineeEntity(3,"name3",null);
-        TraineeEntity ungroupedTrainee2=new TraineeEntity(4,"name4",null);
-        ungroupedTraineeList=new ArrayList<>();
+        TraineeEntity ungroupedTrainee1 = new TraineeEntity(3, "name3", null);
+        TraineeEntity ungroupedTrainee2 = new TraineeEntity(4, "name4", null);
+        ungroupedTraineeList = new ArrayList<>();
         ungroupedTraineeList.add(ungroupedTrainee1);
         ungroupedTraineeList.add(ungroupedTrainee2);
     }
 
     @Test
-    void should_get_grouped_trainee_list(){
+    void should_get_grouped_trainee_list() {
         when(traineeRepository.findAllByGroupIdNotNull()).thenReturn(groupedTraineeList);
         List<Trainee> traineeList = traineeService.findAll(true);
         assertThat(traineeList.size()).isEqualTo(2);
@@ -57,7 +57,7 @@ class TraineeServiceTest {
     }
 
     @Test
-    void should_get_ungrouped_trainee_list(){
+    void should_get_ungrouped_trainee_list() {
         when(traineeRepository.findAllByGroupIdIsNull()).thenReturn(ungroupedTraineeList);
         List<Trainee> traineeList = traineeService.findAll(false);
         assertThat(traineeList.size()).isEqualTo(2);

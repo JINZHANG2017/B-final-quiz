@@ -29,10 +29,10 @@ public class TraineeEntity {
     private Integer id;
     private String name;
     @ManyToOne
-    @JoinColumn(name = "group_id",foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private GroupEntity group;
 
     public Trainee toDto() {
-        return new Trainee(id,name);
+        return new Trainee(id, name);
     }
 }

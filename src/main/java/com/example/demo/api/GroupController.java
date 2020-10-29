@@ -20,12 +20,12 @@ public class GroupController {
     }
 
     @GetMapping
-    public List<Group> getGroupList(){
+    public List<Group> getGroupList() {
         return groupService.getGroupList();
     }
 
     @PostMapping("/auto-grouping")
-    public List<Group> autoGrouping(){
+    public List<Group> autoGrouping() {
         return groupService.group();
     }
 }

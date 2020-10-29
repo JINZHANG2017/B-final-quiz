@@ -40,14 +40,14 @@ class TraineeControllerTest {
 
     @BeforeEach
     void setUp() {
-        Trainee groupedTrainee1=new Trainee(1,"name1");
-        Trainee groupedTrainee2=new Trainee(2,"name2");
-        groupedTraineeList=new ArrayList<>();
+        Trainee groupedTrainee1 = new Trainee(1, "name1");
+        Trainee groupedTrainee2 = new Trainee(2, "name2");
+        groupedTraineeList = new ArrayList<>();
         groupedTraineeList.add(groupedTrainee1);
         groupedTraineeList.add(groupedTrainee2);
-        Trainee ungroupedTrainee1=new Trainee(3,"name3");
-        Trainee ungroupedTrainee2=new Trainee(4,"name4");
-        ungroupedTraineeList=new ArrayList<>();
+        Trainee ungroupedTrainee1 = new Trainee(3, "name3");
+        Trainee ungroupedTrainee2 = new Trainee(4, "name4");
+        ungroupedTraineeList = new ArrayList<>();
         ungroupedTraineeList.add(ungroupedTrainee1);
         ungroupedTraineeList.add(ungroupedTrainee2);
     }
@@ -55,7 +55,7 @@ class TraineeControllerTest {
     @Test
     public void should_get_grouped_trainee() throws Exception {
         when(traineeService.findAll(true)).thenReturn(groupedTraineeList);
-        mockMvc.perform(get("/trainees?grouped=true",1))
+        mockMvc.perform(get("/trainees?grouped=true", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].name", is("name1")))
@@ -65,7 +65,7 @@ class TraineeControllerTest {
     @Test
     public void should_get_ungrouped_trainee() throws Exception {
         when(traineeService.findAll(false)).thenReturn(ungroupedTraineeList);
-        mockMvc.perform(get("/trainees?grouped=false",1))
+        mockMvc.perform(get("/trainees?grouped=false", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].name", is("name3")))
@@ -73,9 +73,9 @@ class TraineeControllerTest {
     }
 
     @Test
-    public void should_add_a_trainee() throws Exception{
-        Trainee trainee=ungroupedTraineeList.get(0);
-        ObjectMapper objectMapper=new ObjectMapper();
+    public void should_add_a_trainee() throws Exception {
+        Trainee trainee = ungroupedTraineeList.get(0);
+        ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(trainee);
         when(traineeService.add(trainee)).thenReturn(trainee);
         mockMvc.perform(post("/trainees")

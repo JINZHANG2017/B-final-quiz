@@ -34,7 +34,7 @@ public class GroupEntity {
     public Group toDto() {
         List<Trainee> traineeDtoList = this.traineeList.stream().map(traineeEntity -> traineeEntity.toDto()).collect(Collectors.toList());
         List<Trainer> trainerDtoList = this.trainerList.stream().map(trainerEntity -> trainerEntity.toDto()).collect(Collectors.toList());
-        return new Group(id,name, trainerDtoList, traineeDtoList);
+        return new Group(id, name, trainerDtoList, traineeDtoList);
     }
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "group")

@@ -41,9 +41,9 @@ public class TrainerService {
 
     public void delete(Integer id) {
         Optional<TrainerEntity> trainerEntity = trainerRepository.findById(id);
-        if(trainerEntity.isPresent()){
+        if (trainerEntity.isPresent()) {
             trainerRepository.delete(trainerEntity.get());
-        }else{
+        } else {
             throw new ResourceNotFoundException("未找到导师！");
         }
     }

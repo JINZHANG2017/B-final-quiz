@@ -31,19 +31,19 @@ public class TraineeController {
     }
 
     @GetMapping
-    public List<Trainee> getList(@RequestParam(value = "grouped") Boolean grouped){
+    public List<Trainee> getList(@RequestParam(value = "grouped") Boolean grouped) {
         return traineeService.findAll(grouped);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Trainee addTrainee(@RequestBody @Valid Trainee trainee){
+    public Trainee addTrainee(@RequestBody @Valid Trainee trainee) {
         return traineeService.add(trainee);
     }
 
     @DeleteMapping("/{trainee_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTrainee(@PathVariable(value = "trainee_id") Integer id){
+    public void deleteTrainee(@PathVariable(value = "trainee_id") Integer id) {
         traineeService.delete(id);
     }
 }

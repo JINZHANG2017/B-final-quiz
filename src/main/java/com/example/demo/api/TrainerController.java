@@ -34,13 +34,13 @@ public class TrainerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addTrainer(@RequestBody @Valid Trainer trainer){
+    public void addTrainer(@RequestBody @Valid Trainer trainer) {
         trainerService.add(trainer);
     }
 
     @DeleteMapping("/{trainer_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTrainer(@PathVariable(value = "trainer_id") Integer id){
+    public void deleteTrainer(@PathVariable(value = "trainer_id") Integer id) {
         trainerService.delete(id);
     }
 
