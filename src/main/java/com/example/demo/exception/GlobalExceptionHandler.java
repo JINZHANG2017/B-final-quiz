@@ -13,8 +13,7 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = ResourceNotFoundException.class)
-    // TODO GTB-4: - 存在没有使用的方法参数
     public ErrorMessage resourseNotFoundExceptionHandler(ResourceNotFoundException e) {
-        return new ErrorMessage(e.getMessage());
+        return new ErrorMessage(HttpStatus.NOT_FOUND.value(),e.getMessage());
     }
 }
