@@ -37,4 +37,8 @@ public class TraineeService {
         traineeRepository.save(entity);
         return entity.toDto();
     }
+
+    public void delete(Integer id) {
+        traineeRepository.deleteById(id);
+    }
 }
