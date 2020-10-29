@@ -25,11 +25,11 @@ public class TraineeService {
 //        trainerRepository.findAll
         List<TraineeEntity> traineeEntityList = new ArrayList<>();
         if (grouped) {
-            traineeEntityList =traineeRepository.findAllByGroupIdNotNull();
-        }else{
-            traineeEntityList =traineeRepository.findAllByGroupIdIsNull();
+            traineeEntityList = traineeRepository.findAllByGroupIdNotNull();
+        } else {
+            traineeEntityList = traineeRepository.findAllByGroupIdIsNull();
         }
-        return traineeEntityList.stream().map( traineeEntity-> {
+        return traineeEntityList.stream().map(traineeEntity -> {
             return traineeEntity.toDto();
         }).collect(Collectors.toList());
     }
@@ -42,9 +42,9 @@ public class TraineeService {
 
     public void delete(Integer id) {
         Optional<TraineeEntity> traineeEntity = traineeRepository.findById(id);
-        if(traineeEntity.isPresent()){
-            traineeRepository.deleteById(id);
-        }else{
+        if (traineeEntity.isPresent()) {
+            traineeRepository.delete(traineeEntity.get());
+        } else {
             throw new ResourceNotFoundException("未找到学员！");
         }
     }
