@@ -37,9 +37,9 @@ public class GroupEntity {
         return new Group(id, name, trainerDtoList, traineeDtoList);
     }
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "group")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "group")
     private List<TrainerEntity> trainerList;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "group")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "group")
     private List<TraineeEntity> traineeList;
 }

@@ -60,6 +60,8 @@ public class GroupService {
         for (int i = 1; i <= groupNum; i++) {
 //            Team 1
             Group group = new Group(i, "Team " + i, trainerList.get(i - 1), traineeList.get(i - 1));
+            GroupEntity groupEntity=group.toEntity();
+            groupRepostitory.save(groupEntity);
             list.add(group);
         }
         return list;
