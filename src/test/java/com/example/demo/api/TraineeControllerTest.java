@@ -2,6 +2,7 @@ package com.example.demo.api;
 
 import com.example.demo.dto.Trainee;
 import com.example.demo.service.TraineeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -67,5 +70,19 @@ class TraineeControllerTest {
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].name", is("name3")))
                 .andExpect(jsonPath("$[1].name", is("name4")));
+    }
+
+    @Test
+    public void should_add_a_trainee() throws Exception{
+        Trainee trainee=ungroupedTraineeList.get(0);
+        ObjectMapper objectMapper=new ObjectMapper();
+        String json = objectMapper.writeValueAsString(trainee);
+        when(traineeService.add(trainee)).thenReturn(trainee);
+        mockMvc.perform(post("/trainees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", is(3)))
+                .andExpect(jsonPath("$.name", is("name3")));
     }
 }

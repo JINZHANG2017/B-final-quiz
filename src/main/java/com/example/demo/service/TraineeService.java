@@ -31,4 +31,10 @@ public class TraineeService {
             return traineeEntity.toDto();
         }).collect(Collectors.toList());
     }
+
+    public Trainee add(Trainee trainee) {
+        TraineeEntity entity = trainee.toEntity();
+        traineeRepository.save(entity);
+        return entity.toDto();
+    }
 }
