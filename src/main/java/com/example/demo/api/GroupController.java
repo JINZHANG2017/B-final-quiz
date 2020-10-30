@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+// TODO GTB-知识点: - 违反Restful实践, url不合理
 @RequestMapping("/group")
 public class GroupController {
     private final GroupService groupService;
@@ -25,6 +26,7 @@ public class GroupController {
     }
 
     @PostMapping("/auto-grouping")
+    // TODO GTB-知识点: - 违反Restful实践, Post请求成功后应该返回201
     public List<Group> autoGrouping() {
         return groupService.group();
     }

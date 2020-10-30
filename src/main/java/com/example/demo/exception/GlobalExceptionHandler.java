@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ErrorMessage methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+        // TODO GTB-知识点: - 校验错误的异常处理应该提取校验注解上的message
         return new ErrorMessage(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 }

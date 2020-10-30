@@ -24,6 +24,7 @@ public class GroupService {
     private final TrainerRepository trainerRepository;
     private final TraineeRepository traineeRepository;
 
+    // TODO GTB-工程实践: - 过长的代码，应该及时换行
     public GroupService(GroupRepostitory groupRepostitory, TrainerRepository trainerRepository, TraineeRepository traineeRepository) {
         this.groupRepostitory = groupRepostitory;
         this.trainerRepository = trainerRepository;
@@ -36,10 +37,13 @@ public class GroupService {
         return groupList;
     }
 
+    // TODO GTB-工程实践: - 长方法，可以抽成多个方法提高可读性
     public List<Group> group() {
+        // TODO GTB-完成度: - 违反需求，讲师不够两个时，需要抛异常
         groupRepostitory.deleteAll();
         List<TraineeEntity> traineeEntityList = traineeRepository.findAll();
         List<TrainerEntity> trainerEntityList = trainerRepository.findAll();
+        // TODO GTB-工程实践: - Magic Number
         int groupNum = trainerEntityList.size() / 2;
         Collections.shuffle(trainerEntityList);
         Collections.shuffle(traineeEntityList);

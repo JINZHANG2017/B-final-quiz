@@ -22,6 +22,7 @@ public class TraineeService {
     }
 
     public List<Trainee> findAll(Boolean grouped) {
+        // TODO GTB-工程实践: - 不用的代码应该及时清理
 //        trainerRepository.findAll
         List<TraineeEntity> traineeEntityList = new ArrayList<>();
         if (grouped) {
@@ -29,6 +30,7 @@ public class TraineeService {
         } else {
             traineeEntityList = traineeRepository.findAllByGroupIdIsNull();
         }
+        // TODO GTB-知识点: - 以下lambda表达式可以简化
         return traineeEntityList.stream().map(traineeEntity -> {
             return traineeEntity.toDto();
         }).collect(Collectors.toList());
@@ -42,6 +44,7 @@ public class TraineeService {
 
     public void delete(Integer id) {
         Optional<TraineeEntity> traineeEntity = traineeRepository.findById(id);
+        // TODO GTB-知识点: - 可以使用orElseThrow方法
         if (traineeEntity.isPresent()) {
             traineeRepository.delete(traineeEntity.get());
         } else {
